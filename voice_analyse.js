@@ -42,7 +42,7 @@ const onAudioProcess = (e) => {
 
 // 解析用処理
 const analyseVoice = () => {
-    let fsDivN = audioContext.sampleRate / audioAnalyser.fftSize;
+    let fsDivN = audioContext.sampleRate / audioAnalyser.fftSize;      //周波数分解能
     let spectrums = new Uint8Array(audioAnalyser.frequencyBinCount);   //周波数領域の振幅データ格納用配列を生成
     audioAnalyser.getByteFrequencyData(spectrums);                     //周波数領域の振幅データを配列に格納
 
@@ -61,11 +61,11 @@ const analyseVoice = () => {
         } else {
             canvas_F_Context.lineTo(x, y);
         }
-        var f = Math.floor(i * fsDivN);  // index -> frequency;
+        let f = Math.floor(i * fsDivN);  // index -> frequency;
 
         // 500 Hz単位にy軸の線とラベル出力
         if ((f % 500) === 0) {
-            var text = (f < 1000) ? (f + ' Hz') : ((f / 1000) + ' kHz');
+            let text = (f < 1000) ? (f + ' Hz') : ((f / 1000) + ' kHz');
             // Draw grid (X)
             canvas_F_Context.fillRect(x, 0, 1, canvasFrequency.height);
             // Draw text (X)
