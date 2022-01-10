@@ -43,6 +43,8 @@ const onAudioProcess = (e) => {
 // 解析用処理
 const analyseVoice = () => {
     let fsDivN = audioContext.sampleRate / audioAnalyser.fftSize;      //周波数分解能
+    console.log("audioContext.sampleRate: "+ audioContext.sampleRate);
+    console.log("fsdivN: "+ fsDivN);
     let spectrums = new Uint8Array(audioAnalyser.frequencyBinCount);   //周波数領域の振幅データ格納用配列を生成
     audioAnalyser.getByteFrequencyData(spectrums);                     //周波数領域の振幅データを配列に格納
 
@@ -51,8 +53,8 @@ const analyseVoice = () => {
 
     canvas_F_Context.clearRect(0, 0, canvasFrequency.width, canvasFrequency.height);
     canvas_F_Context.beginPath();
-
-    for (var i = 0, len = spectrums.length; i < len; i++) {
+    
+    for (let i = 0, len = spectrums.length; i < len; i++) {
         //canvasにおさまるように線を描画
         let x = (i / len) * canvasFrequency.width;
         let y = (1 - (spectrums[i] / 255)) * canvasFrequency.height;
